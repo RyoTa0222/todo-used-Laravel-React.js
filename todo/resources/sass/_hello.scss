@@ -1,0 +1,128 @@
+#hello{
+    #container{
+        width: 100vw;
+        height: 100vh;
+        background: $hello-bg;
+        margin: 0;
+        color: white;
+        display: grid;
+        grid-template-rows: 10vh 80vh 10vh;
+        grid-template-columns: 20vw 60vw 20vw;
+        position: relative;
+        overflow: hidden;
+        @keyframes todoBg {
+            from{
+                left: calc(100% + 30rem);
+            }
+            to{
+                left: -30rem;
+            }
+        }
+        &::before, &::after{
+            content: 'ToDo';
+            display: inline-block;
+            position: absolute;
+            font-size: 12rem;
+            color: white;
+            opacity: .2;
+            font-family: 'Righteous', cursive;
+            left: calc(100% + 30rem);
+        }
+        &::before{
+            top: 2rem;
+            animation: todoBg 15s linear infinite ;
+            z-index: 1;
+        }
+        &::after{
+            bottom: 2rem;
+            animation: todoBg 15s linear 4s infinite ;
+            z-index: 1;
+        }
+        .main{
+            grid-row: 2;
+            grid-column: 2;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            flex-flow: column;
+            z-index: 100;
+            box-sizing: border-box;
+            padding: 2rem;
+            border: solid 6px white;
+            outline-offset: 6px;
+            outline: solid 6px white;
+            background: #ffffff30;
+            h1{
+                font-family: 'Pacifico', cursive;
+                letter-spacing: 5px;
+                text-align: center;
+                font-size: 4rem;
+            }
+        }
+    }
+    a{
+        color: white;
+        font-size: 2rem;
+        display: inline-block;
+        font-family: 'Bree Serif', serif;
+        position: absolute;
+        top: 60%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 1rem 6rem;
+        background: $button-bg;
+        z-index: 1000000000; 
+        &:hover{
+            text-decoration: none;
+        }
+        &::before{
+            content: '';
+            display: inline;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: $button-bg;
+            -webkit-filter: blur(10px);
+            filter: blur(10px);
+            z-index: -10;
+            transition: all .2s;
+        }
+        &::after{
+            content: "Let's ToDo";
+            display: inline-block;
+            width: 100%;
+            color: white;
+            font-size: 2rem;
+            position: absolute;
+            top: -1rem;
+            left: 50%;
+            letter-spacing: 0;
+            transform: translateX(-50%);
+            z-index: -20;
+            opacity: 0;
+            transition: all .2s;
+            text-align: center;
+        }
+        &:hover{
+            &::before{
+                filter: blur(20px);
+            }
+            &::after{
+                top: -5rem;
+                opacity: 1;
+                letter-spacing: 10px;
+            }
+        }
+    }
+    a+#container{
+        -webkit-filter: blur(0);
+        filter: blur(0);
+        transition: filter 1s;
+    }
+    a:hover+#container{
+        -webkit-filter: blur(10px)sepia(60%);
+        filter: blur(10px)sepia(60%);
+    }
+}
